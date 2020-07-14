@@ -1,6 +1,6 @@
 # spiritz_nuxt
 
-> Nuxt.js implementation of Spiriz app
+> Nuxt.js implementation of Spiritz app (now a private repo)
 
 ## Build Setup
 
