@@ -22,7 +22,7 @@
         <b-nav-item v-if="loggedIn" href="#">
           Hello!
         </b-nav-item>
-        <b-nav-item v-if="loggedIn" href="#" @click="signOut">
+        <b-nav-item v-if="loggedIn" href="#" @click="onSignOut">
           Sign Out
         </b-nav-item>
       </b-navbar-nav>
