@@ -39,8 +39,7 @@ export default {
     ...mapState('auth', ['isLoggedIn'])
   },
   watch: {
-    isLoggedIn (newVal, oldVal) {
-      console.log('isLoggedIn', newVal, oldVal)
+    isLoggedIn (val) {
     }
   },
   methods: {

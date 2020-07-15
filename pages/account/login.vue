@@ -51,7 +51,7 @@ export default {
 
       this.signIn({ username: this.form.username, password: this.form.password })
         .then((result) => {
-          this.$router.push('/')
+          this.$router.push(this.$route.query.redirect || '/')
         }).catch((err) => {
           console.error(err)
         })
