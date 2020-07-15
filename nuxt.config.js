@@ -31,6 +31,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/auth.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -70,7 +71,10 @@ export default {
   },
   env: {
     apiUrl: 'http://localhost:3030',
+    // Obviously, don't store token data here in production. For dev purposes only
     tokenName: 'user_token',
-    tokenSecret: '471896512C0B9FFA2B6A2D5E4762BBB41757ED4CA4F24F8A08AEEDA9C664BBFD'
+    tokenSecret: '471896512C0B9FFA2B6A2D5E4762BBB41757ED4CA4F24F8A08AEEDA9C664BBFD',
+    tokenAlg: 'HS256',
+    tokenExpireSeconds: 600
   }
 }
