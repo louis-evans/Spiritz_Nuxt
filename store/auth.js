@@ -1,4 +1,4 @@
-import { signIn, signOut } from '~/helper/authHelper'
+import { signIn, signOut, ERR_INVALID_CREDENTIALS } from '~/helper/authHelper'
 
 export const state = () => ({
   isLoggedIn: false
@@ -24,7 +24,14 @@ export const actions = {
         })
         .catch((err) =>
         {
-          reject(err)
+          if (err.message === ERR_INVALID_CREDENTIALS)
+          {
+            reject(new Error('Either username or password is incorrect'))
+          }
+          else
+          {
+            reject(err)
+          }
         })
     })
   },
