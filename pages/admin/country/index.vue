@@ -89,18 +89,13 @@ export default {
     this.loadCountries()
   },
   methods: {
-    ...mapActions({
-      addCountry: 'countries/addCountry',
-      deleteCountry: 'countries/deleteCountry',
-      loadCountries: 'countries/loadCountries',
-      updateCountry: 'countries/updateCountry'
-    }),
+    ...mapActions('countries', ['addCountry', 'deleteCountry', 'loadCountries', 'updateCountry']),
     onCountryEntry (id)
     {
       if (typeof (id) === 'number')
       {
         this.countryEntryId = id
-        this.countryEntryText = this.countries.filter(c => c.Id === id)[0].Name
+        this.countryEntryText = this.countries.find(c => c.Id === id).Name
       }
 
       Vue.nextTick(() =>
