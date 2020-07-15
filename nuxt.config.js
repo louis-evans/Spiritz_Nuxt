@@ -61,10 +61,16 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend (config, ctx)
+    {
     }
   },
   router: {
     middleware: 'auth'
+  },
+  env: {
+    apiUrl: 'http://localhost:3030',
+    tokenName: 'user_token',
+    tokenSecret: '471896512C0B9FFA2B6A2D5E4762BBB41757ED4CA4F24F8A08AEEDA9C664BBFD'
   }
 }
