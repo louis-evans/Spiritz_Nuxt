@@ -1,7 +1,7 @@
-import { sign, verify } from 'jsonwebtoken'
+import { sign } from 'jsonwebtoken'
+import { setToken, removeToken, verifyToken } from '~/helper/tokenHelper'
 
 const tokenSecret = process.env.tokenSecret
-const tokenName = process.env.tokenName
 const tokenExpires = process.env.tokenExpireSeconds
 const tokenAlg = process.env.tokenAlg
 
@@ -16,12 +16,17 @@ export function signIn (username, password)
     {
       if (username === 'louis@evans.test' && password === 'somepassword')
       {
-        const token = sign({ username }, tokenSecret, {
+        const payload = {
+          name: 'Louis Evans',
+          username
+        }
+
+        const token = sign(payload, tokenSecret, {
           algorithm: tokenAlg,
           expiresIn: tokenExpires
         })
 
-        localStorage.setItem(tokenName, token)
+        setToken(token)
 
         resolve()
       }
@@ -37,7 +42,7 @@ export function signOut ()
 {
   return new Promise((resolve) =>
   {
-    localStorage.removeItem(tokenName)
+    removeToken()
     resolve()
   })
 }
@@ -46,12 +51,12 @@ export function isLoggedIn ()
 {
   try
   {
-    verify(localStorage.getItem(tokenName), tokenSecret)
+    verifyToken()
     return true
   }
   catch (e)
   {
-    localStorage.removeItem(tokenName)
+    removeToken()
 
     // Either:
     // - No token

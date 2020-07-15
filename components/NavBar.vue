@@ -20,7 +20,7 @@
           Sign In
         </b-nav-item>
         <b-nav-item v-if="isLoggedIn" href="#">
-          Hello!
+          Hello {{ userName }}!
         </b-nav-item>
         <b-nav-item v-if="isLoggedIn" href="#" @click="onSignOut">
           Sign Out
@@ -33,10 +33,15 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
+import { getUserName } from '~/helper/tokenHelper'
 
 export default {
   computed: {
-    ...mapState('auth', ['isLoggedIn'])
+    ...mapState('auth', ['isLoggedIn']),
+    userName ()
+    {
+      return getUserName()
+    }
   },
   watch: {
     isLoggedIn (val)
