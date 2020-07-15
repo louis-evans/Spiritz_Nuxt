@@ -1,19 +1,13 @@
 <template>
   <div>
     <h2>Countries</h2>
-
-    <hr>
-
     <b-row>
-      <b-col>
+      <b-col class="d-flex pt-2 pb-2" style="flex-direction:row-reverse">
         <b-button variant="primary" @click="onCountryEntry">
-          Add +
+          New Country <i class="fa fa-plus" />
         </b-button>
       </b-col>
     </b-row>
-
-    <hr>
-
     <b-row>
       <b-col>
         <b-table striped hover fixed :items="countries" :fields="fields">
@@ -96,13 +90,18 @@ export default {
   },
   methods: {
     ...mapActions({
+      addCountry: 'countries/addCountry',
       deleteCountry: 'countries/deleteCountry',
-      loadCountries: 'countries/loadCountries'
+      loadCountries: 'countries/loadCountries',
+      updateCountry: 'countries/updateCountry'
     }),
     onCountryEntry (id)
     {
-      this.countryEntryId = id
-      this.countryEntryText = this.countries.filter(c => c.Id === id)[0].Name
+      if (typeof (id) === 'number')
+      {
+        this.countryEntryId = id
+        this.countryEntryText = this.countries.filter(c => c.Id === id)[0].Name
+      }
 
       Vue.nextTick(() =>
       {
@@ -111,13 +110,26 @@ export default {
     },
     onCountryEntryResult (result)
     {
-      if (result !== null && result.trim() === '')
+      if (result === null || result.trim() === '')
       {
         this.alertMessage = 'Value cannot be empty!'
         Vue.nextTick(() =>
         {
           this.$bvModal.show('alert')
         })
+      }
+      else if (this.countryEntryId === 0)
+      {
+        this.addCountry({ Name: result })
+      }
+      else
+      {
+        this.updateCountry({ Id: this.countryEntryId, Name: result })
+          .then(() =>
+          {
+            this.countryEntryId = 0
+            this.countryEntryText = null
+          })
       }
     },
     onDelete (id)

@@ -1,6 +1,7 @@
-import axios from 'axios'
+// import axios from 'axios'
+import Vue from 'vue'
 
-const apiUrl = process.env.VUE_APP_API_URL
+// const apiUrl = process.env.VUE_APP_API_URL
 
 export const state = () => ({
   countries: null
@@ -25,14 +26,26 @@ export const mutations = {
   SAVE_COUNTRIES (state, countries)
   {
     state.countries = countries
+  },
+  UPDATE_COUNTRY (state, country)
+  {
+    const index = state.countries.findIndex(c => c.Id === country.Id)
+    Vue.set(state.countries, index, country)
   }
 }
 
 export const actions = {
-  addCountry ({ commit }, data)
+  addCountry ({ commit, state }, country)
   {
-    return axios.post(`${apiUrl}/country/add`, data)
-      .then(response => commit('ADD_COUNTRY', response.data))
+    return new Promise((resolve) =>
+    {
+      country.Id = state.countries.length + 1
+      commit('ADD_COUNTRY', country)
+      resolve()
+    })
+
+    // return axios.post(`${apiUrl}/country/add`, data)
+    //   .then(response => commit('ADD_COUNTRY', response.data))
   },
   loadCountries ({ commit })
   {
@@ -66,5 +79,13 @@ export const actions = {
     })
     // return axios.delete(`${apiUrl}/country?id=${id}`)
     //   .then(response => commit('REMOVE_COUNTRY', id))
+  },
+  updateCountry ({ commit }, country)
+  {
+    return new Promise((resolve) =>
+    {
+      commit('UPDATE_COUNTRY', country)
+      resolve()
+    })
   }
 }
