@@ -39,8 +39,8 @@ export default {
   data () {
     return {
       form: {
-        username: 'dfddfsldgs@fvdfdf.com',
-        password: 'asdadfdf'
+        username: 'louis@evans.test',
+        password: 'somepassword'
       }
     }
   },

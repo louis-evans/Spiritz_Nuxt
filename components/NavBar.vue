@@ -9,20 +9,20 @@
         <b-nav-item href="#" to="/">
           Home
         </b-nav-item>
-        <b-nav-item-dropdown v-if="loggedIn" text="Admin">
+        <b-nav-item-dropdown v-if="isLoggedIn" text="Admin">
           <b-dropdown-item to="/admin/country">
             Countries
           </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item v-if="!loggedIn" to="/account/login">
+        <b-nav-item v-if="!isLoggedIn" to="/account/login">
           Sign In
         </b-nav-item>
-        <b-nav-item v-if="loggedIn" href="#">
+        <b-nav-item v-if="isLoggedIn" href="#">
           Hello!
         </b-nav-item>
-        <b-nav-item v-if="loggedIn" href="#" @click="onSignOut">
+        <b-nav-item v-if="isLoggedIn" href="#" @click="onSignOut">
           Sign Out
         </b-nav-item>
       </b-navbar-nav>
@@ -36,9 +36,12 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapState({
-      loggedIn: state => state.auth.loggedIn
-    })
+    ...mapState('auth', ['isLoggedIn'])
+  },
+  watch: {
+    isLoggedIn (newVal, oldVal) {
+      console.log('isLoggedIn', newVal, oldVal)
+    }
   },
   methods: {
     ...mapActions('auth', ['signOut']),
