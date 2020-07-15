@@ -13,6 +13,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'brace-style': [ 'error', 'allman' ]
+    'brace-style': [ 'error', 'allman' ],
+    'no-console': 'off'
   }
 }
