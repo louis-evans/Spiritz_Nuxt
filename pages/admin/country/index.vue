@@ -33,19 +33,19 @@
       </b-col>
     </b-row>
 
-    <ConfirmationModal
+    <confirmation-modal
       message="Are you sure you want to delete this country?"
       ok-text="Yes"
       cancel-text="No"
       @result="onDeleteConfirm"
     />
-    <PromptModal
+    <prompt-modal
       id="add-country"
       message="Enter the country name"
       :default="countryEntryText"
       @result="onCountryEntryResult"
     />
-    <AlertModal
+    <alert-modal
       :message="alertMessage"
     />
   </div>
