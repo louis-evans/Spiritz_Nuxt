@@ -39,16 +39,20 @@ export default {
     ...mapState('auth', ['isLoggedIn'])
   },
   watch: {
-    isLoggedIn (val) {
+    isLoggedIn (val)
+    {
     }
   },
   methods: {
     ...mapActions('auth', ['signOut']),
-    onSignOut () {
+    onSignOut ()
+    {
       this.signOut()
-        .then((result) => {
+        .then((result) =>
+        {
           this.$router.push('/')
-        }).catch((err) => {
+        }).catch((err) =>
+        {
           console.error(err)
         })
     }

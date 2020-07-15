@@ -15,37 +15,47 @@ export const getters = {
 }
 
 export const mutations = {
-  LOAD_RECORD (state, record) {
+  LOAD_RECORD (state, record)
+  {
     state.currentRecord = record
   },
-  SAVE_SPIRIT_TYPES (state, types) {
+  SAVE_SPIRIT_TYPES (state, types)
+  {
     state.spiritTypes = types
   }
 }
 
 export const actions = {
-  deleteRecord ({ commit }, id) {
+  deleteRecord ({ commit }, id)
+  {
     return axios.delete(`${apiUrl}/spirittype?id=${id}`)
   },
-  loadSpiritType ({ commit }, id) {
-    if (id) {
+  loadSpiritType ({ commit }, id)
+  {
+    if (id)
+    {
       return axios.get(`${apiUrl}/spirittype?id=${id}`)
         .then(response => commit('LOAD_RECORD', response.data))
     }
 
-    return new Promise((resolve) => {
+    return new Promise((resolve) =>
+    {
       // load an empty record
       commit('LOAD_RECORD', { TypeID: null, TypeName: '', Variants: [] })
       resolve()
     })
   },
-  loadSpiritTypes ({ commit }) {
+  loadSpiritTypes ({ commit })
+  {
     return axios.get(`${apiUrl}/spirittype/all`)
       .then(response => commit('SAVE_SPIRIT_TYPES', response.data))
   },
-  saveRecord ({ commit, state }) {
-    state.currentRecord.Variants = state.currentRecord.Variants.map((v) => {
-      if (isNaN(Number(v.VariantId))) {
+  saveRecord ({ commit, state })
+  {
+    state.currentRecord.Variants = state.currentRecord.Variants.map((v) =>
+    {
+      if (isNaN(Number(v.VariantId)))
+      {
         // remove the temp id so the API knows they are new
         v.VariantId = null
       }

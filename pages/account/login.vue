@@ -36,7 +36,8 @@
 import { mapActions } from 'vuex'
 
 export default {
-  data () {
+  data ()
+  {
     return {
       form: {
         username: 'louis@evans.test',
@@ -46,17 +47,21 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['signIn']),
-    onSubmit (e) {
+    onSubmit (e)
+    {
       e.preventDefault()
 
       this.signIn({ username: this.form.username, password: this.form.password })
-        .then((result) => {
+        .then((result) =>
+        {
           this.$router.push(this.$route.query.redirect || '/')
-        }).catch((err) => {
+        }).catch((err) =>
+        {
           console.error(err)
         })
     },
-    onReset (e) {
+    onReset (e)
+    {
       e.preventDefault()
       this.form.username = ''
       this.form.password = ''

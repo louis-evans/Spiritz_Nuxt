@@ -31,10 +31,12 @@ export default {
     }
   },
   methods: {
-    onCancel () {
+    onCancel ()
+    {
       this.$emit('result', false)
     },
-    onOk () {
+    onOk ()
+    {
       this.$emit('result', true)
     }
   }

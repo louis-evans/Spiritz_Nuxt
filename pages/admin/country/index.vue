@@ -71,7 +71,8 @@ export default {
     ConfirmationModal,
     PromptModal
   },
-  data () {
+  data ()
+  {
     return {
       alertMessage: '',
       countryEntryId: 0,
@@ -89,7 +90,8 @@ export default {
       countries: 'countries/allCountries'
     })
   },
-  mounted () {
+  mounted ()
+  {
     this.loadCountries()
   },
   methods: {
@@ -97,30 +99,39 @@ export default {
       deleteCountry: 'countries/deleteCountry',
       loadCountries: 'countries/loadCountries'
     }),
-    onCountryEntry (id) {
+    onCountryEntry (id)
+    {
       this.countryEntryId = id
       this.countryEntryText = this.countries.filter(c => c.Id === id)[0].Name
 
-      Vue.nextTick(() => {
+      Vue.nextTick(() =>
+      {
         this.$bvModal.show('add-country')
       })
     },
-    onCountryEntryResult (result) {
-      if (result !== null && result.trim() === '') {
+    onCountryEntryResult (result)
+    {
+      if (result !== null && result.trim() === '')
+      {
         this.alertMessage = 'Value cannot be empty!'
-        Vue.nextTick(() => {
+        Vue.nextTick(() =>
+        {
           this.$bvModal.show('alert')
         })
       }
     },
-    onDelete (id) {
+    onDelete (id)
+    {
       this.toDeleteId = id
       this.$bvModal.show('confirm')
     },
-    onDeleteConfirm (isDelete) {
-      if (isDelete) {
+    onDeleteConfirm (isDelete)
+    {
+      if (isDelete)
+      {
         this.deleteCountry(this.toDeleteId)
-          .then(() => {
+          .then(() =>
+          {
             this.toDeleteId = 0
           })
       }

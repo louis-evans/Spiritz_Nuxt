@@ -27,19 +27,23 @@ export default {
       default: null
     }
   },
-  data () {
+  data ()
+  {
     return {
       result: null
     }
   },
   methods: {
-    onCancel () {
+    onCancel ()
+    {
       this.$emit('result', null)
     },
-    onOk () {
+    onOk ()
+    {
       this.$emit('result', this.result)
     },
-    onShow () {
+    onShow ()
+    {
       this.result = this.default
     }
   }

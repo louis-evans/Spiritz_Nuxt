@@ -7,30 +7,37 @@ export const state = () => ({
 })
 
 export const getters = {
-  allCountries: (state) => {
+  allCountries: (state) =>
+  {
     return state.countries
   }
 }
 
 export const mutations = {
-  ADD_COUNTRY (state, newCountry) {
+  ADD_COUNTRY (state, newCountry)
+  {
     state.countries.push(newCountry)
   },
-  REMOVE_COUNTRY (state, id) {
+  REMOVE_COUNTRY (state, id)
+  {
     state.countries = state.countries.filter(c => c.Id !== id)
   },
-  SAVE_COUNTRIES (state, countries) {
+  SAVE_COUNTRIES (state, countries)
+  {
     state.countries = countries
   }
 }
 
 export const actions = {
-  addCountry ({ commit }, data) {
+  addCountry ({ commit }, data)
+  {
     return axios.post(`${apiUrl}/country/add`, data)
       .then(response => commit('ADD_COUNTRY', response.data))
   },
-  loadCountries ({ commit }) {
-    return new Promise((resolve) => {
+  loadCountries ({ commit })
+  {
+    return new Promise((resolve) =>
+    {
       commit('SAVE_COUNTRIES', [
         {
           Id: 1,
@@ -50,8 +57,10 @@ export const actions = {
     // return axios.get(`${apiUrl}/country/all`)
     //   .then(response => commit('SAVE_COUNTRIES', response.data))
   },
-  deleteCountry ({ commit }, id) {
-    return new Promise((resolve) => {
+  deleteCountry ({ commit }, id)
+  {
+    return new Promise((resolve) =>
+    {
       commit('REMOVE_COUNTRY', id)
       resolve()
     })

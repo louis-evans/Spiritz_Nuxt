@@ -23,7 +23,8 @@ export default {
     }
   },
   methods: {
-    onOk () {
+    onOk ()
+    {
       this.$emit('closed')
     }
   }
